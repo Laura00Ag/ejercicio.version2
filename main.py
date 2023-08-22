@@ -29,10 +29,12 @@ class Sistema:
     #   self.__lista_pacientes = {}
       self.__numero_pacientes = len(self.__lista_pacientes)
       
-    def ingresarPaciente(self):
+
+                
+    def ingresarPaciente(self, cedula):
         # 1- solicito los datos por teclado
         nombre = input("Ingrese el nombre: ")
-        cedula = int(input("Ingrese la cedula: "))    
+        #cedula = int(input("Ingrese la cedula: "))   
         genero = input("Ingrese el genero: ")
         servicio = input("Ingrese el servicio: ")
         # 2- creo el objeto Paciente y le asigno los datos
@@ -60,11 +62,10 @@ class Sistema:
                 print("Genero: " + paciente.verGenero())
                 print("Servicio: " + paciente.verServicio())
                 
-                
-    def VerificarPaciente(self):
+    def VerificarPaciente(self, cedula):
         for paciente in self.__lista_pacientes:
             if cedula == paciente.verCedula():
-                return False
+                return False               
                 
                 
 mi_sistema = Sistema()
@@ -72,11 +73,12 @@ mi_sistema = Sistema()
 while True:
     opcion = int(input("1. Nuevo paciente\n - 2. Numero de paciente\n - 3. Datos paciente\n - 4. Salir:  \n"))
     if opcion == 1:
-        if mi_sistema.VerificarPaciente() == False:
+        cedula = int(input("Ingrese la cedula: "))   
+        if mi_sistema.VerificarPaciente(cedula) == False:
             print("El paciente ya se encuentra registrado.")
             continue
         else:    
-            mi_sistema.ingresarPaciente()
+            mi_sistema.ingresarPaciente(cedula)
             
     elif opcion == 2:
         print("Ahora hay: " + str(mi_sistema.verNumeroPacientes()))
