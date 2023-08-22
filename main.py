@@ -31,26 +31,31 @@ class Sistema:
       
 
                 
-    def ingresarPaciente(self, cedula):
-        # 1- solicito los datos por teclado
-        nombre = input("Ingrese el nombre: ")
-        #cedula = int(input("Ingrese la cedula: "))   
-        genero = input("Ingrese el genero: ")
-        servicio = input("Ingrese el servicio: ")
-        # 2- creo el objeto Paciente y le asigno los datos
-        p = Paciente()
-        p.asignarNombre(nombre)
-        p.asignarCedula(cedula)
-        p.asignarGenero(genero)
-        p.asignarServicio(servicio)        
-        # 3- guardo el Paciente en  la lista        
+    def ingresarPaciente(self, p):
         self.__lista_pacientes.append(p)
-        # self.__lista_pacientes[p.verCedula()] = p
-        # 4- actualizo la cantidad de pacientes en el sistema
-        self.__numero_pacientes = len(self.__lista_pacientes)
+        
+        ########NOTA: Se comentaron estas lineas para cambiar la estructura de ingresar paciente
+        
+        # # 1- solicito los datos por teclado
+        # nombre = input("Ingrese el nombre: ")
+        # #cedula = int(input("Ingrese la cedula: "))   
+        # genero = input("Ingrese el genero: ")
+        # servicio = input("Ingrese el servicio: ")
+        # # 2- creo el objeto Paciente y le asigno los datos
+        # p = Paciente()
+        # p.asignarNombre(nombre)
+        # p.asignarCedula(cedula)
+        # p.asignarGenero(genero)
+        # p.asignarServicio(servicio)        
+        # # 3- guardo el Paciente en  la lista        
+        # self.__lista_pacientes.append(p)
+        # # self.__lista_pacientes[p.verCedula()] = p
+        # # 4- actualizo la cantidad de pacientes en el sistema
+        # self.__numero_pacientes = len(self.__lista_pacientes)
 
     def verNumeroPacientes(self):
-        return self.__numero_pacientes
+        print("En el sistema hay: " + str(self.__numero_pacientes) + " pacientes")
+
     
     def verDatosPaciente(self):
         cedula = int(input("Ingrese la cedula a buscar: "))
@@ -67,25 +72,50 @@ class Sistema:
             if cedula == paciente.verCedula():
                 return False               
                 
+def main():
                 
-mi_sistema = Sistema()
+    mi_sistema = Sistema()
 
-while True:
-    opcion = int(input("1. Nuevo paciente\n - 2. Numero de paciente\n - 3. Datos paciente\n - 4. Salir:  \n"))
-    if opcion == 1:
-        cedula = int(input("Ingrese la cedula: "))   
-        if mi_sistema.VerificarPaciente(cedula) == False:
-            print("El paciente ya se encuentra registrado.")
-            continue
-        else:    
-            mi_sistema.ingresarPaciente(cedula)
+    while True:
+        opcion = int(input("1. Nuevo paciente\n - 2. Numero de paciente\n - 3. Datos paciente\n - 4. Salir:  \n"))
+        if opcion == 1:
             
-    elif opcion == 2:
-        print("Ahora hay: " + str(mi_sistema.verNumeroPacientes()))
-    elif opcion == 3:
-        mi_sistema.verDatosPaciente()
-    elif opcion == 4:
-        break
-    else:
-        print("Opcion invalida")
-    
+            # 1- solicito los datos por teclado
+            nombre = input("Ingrese el nombre: ")
+            cedula = int(input("Ingrese la cedula: "))  
+
+            if mi_sistema.VerificarPaciente(cedula) == False:
+                print("El paciente ya se encuentra registrado.")
+                continue 
+            else:
+                pass
+            genero = input("Ingrese el genero: ")
+            servicio = input("Ingrese el servicio: ")
+            # 2- creo el objeto Paciente y le asigno los datos
+            p = Paciente()
+            p.asignarNombre(nombre)
+            p.asignarCedula(cedula)
+            p.asignarGenero(genero)
+            p.asignarServicio(servicio)        
+            # 3- guardo el Paciente en  la lista        
+            mi_sistema.ingresarPaciente(p)
+            
+            #### self.__lista_pacientes[p.verCedula()] = p
+            
+            # 4- actualizo la cantidad de pacientes en el sistema
+            #self.__numero_pacientes = len(self.__lista_pacientes)
+            
+
+
+        elif opcion == 2:
+            mi_sistema.verNumeroPacientes()
+            ###### NOTA: Se comenta esta línea para cambiar la estructura de sistema
+            #print("Ahora hay: " + str(mi_sistema.verNumeroPacientes()))
+            
+        elif opcion == 3:
+            mi_sistema.verDatosPaciente()
+        elif opcion == 4:
+            break
+        else:
+            print("Opcion invalida")
+        
