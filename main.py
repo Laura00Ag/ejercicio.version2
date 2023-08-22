@@ -60,11 +60,19 @@ class Sistema:
                 print("Genero: " + paciente.verGenero())
                 print("Servicio: " + paciente.verServicio())
                 
+                
+    def VerificarPaciente(self):
+        for paciente in self.__lista_pacientes:
+            if cedula == paciente.verCedula():
+                return False
+                
+                
 mi_sistema = Sistema()
 
 while True:
     opcion = int(input("1. Nuevo paciente\n - 2. Numero de paciente\n - 3. Datos paciente\n - 4. Salir:  \n"))
     if opcion == 1:
+    
         mi_sistema.ingresarPaciente()
     elif opcion == 2:
         print("Ahora hay: " + str(mi_sistema.verNumeroPacientes()))
